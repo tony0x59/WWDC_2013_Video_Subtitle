@@ -11,7 +11,7 @@ import os.path
 
 
 def make_scripts(dstfolder, dic):
-    for i in range(100, 714):
+    for i in range(100, 715):
         srcpath = '%d.srt' % i
         try:
             dstname = '"%d - %s.srt"' % (i, dic[str(i)])
@@ -27,12 +27,15 @@ def load_titles(filepath):
     dic = {}
     file = open(filepath, 'rb')
     for line in file.readlines():
-        row = line.strip('\n').split(':')
-        no, title = row[0], row[1]
-        if (no in dic) == False:
-            dic[no] = title
-        else:
-            print 'dic[%s] = %s  -->  %s  pass' % (no, dic[no], title)
+        try:
+            row = line.strip('\n').split(':')
+            no, title = row[0], row[1]
+            if (no in dic) == False:
+                dic[no] = title
+            else:
+                print 'dic[%s] = %s  -->  %s  pass' % (no, dic[no], title)
+        except Exception,e:
+            print e
     return dic
 
 
